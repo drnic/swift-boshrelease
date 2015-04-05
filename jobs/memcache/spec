@@ -1,0 +1,12 @@
+---
+name: memcache
+packages: 
+- memcache
+templates:
+  bin/memcache_ctl: bin/memcache_ctl
+  bin/monit_debugger: bin/monit_debugger
+  bin/setup.sh: bin/setup.sh
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+  config/memcached.erb : config/memcached

@@ -1,0 +1,39 @@
+---
+name: swift_storage
+packages: 
+- swift_storage
+templates:
+  bin/swift_storage_ctl: bin/swift_storage_ctl
+  bin/monit_debugger: bin/monit_debugger
+  bin/setup.sh.erb: bin/setup.sh
+  bin/configLoopBackDevice.sh.erb: bin/configLoopBackDevice.sh
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+  config/container-server.conf.erb : config/container-server.conf
+  config/account-server.conf.erb : config/account-server.conf
+  config/object-server.conf.erb : config/object-server.conf
+  config/swift.conf.erb : config/swift.conf
+  config/logrotate.erb : config/swift_storage.logrotate
+  config/50-default.conf.erb : config/50-default.conf
+  config/rsyncd.conf.erb : config/rsyncd.conf
+  config/swift-account-auditor.override : config/swift-account-auditor.override
+  config/swift-account.override : config/swift-account.override
+  config/swift-account-reaper.override : config/swift-account-reaper.override
+  config/swift-account-replicator.override : config/swift-account-replicator.override
+  config/swift-container-auditor.override : config/swift-container-auditor.override
+  config/swift-container.override : config/swift-container.override
+  config/swift-container-replicator.override : config/swift-container-replicator.override
+  config/swift-container-sync.override : config/swift-container-sync.override
+  config/swift-container-updater.override : config/swift-container-updater.override
+  config/swift-object-auditor.override : config/swift-object-auditor.override
+  config/swift-object.override : config/swift-object.override
+  config/swift-object-replicator.override : config/swift-object-replicator.override
+  config/swift-object-updater.override : config/swift-object-updater.override
+
+#properties:
+#  swift.ringHostIP:
+#    description: "IP address from where rings are downloaded"
+#  swift.loopBackDeviceSize:
+#    description: "Size of swift filesystem container"
+  

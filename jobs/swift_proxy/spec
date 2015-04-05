@@ -1,0 +1,53 @@
+---
+name: swift_proxy
+packages:
+- swift_proxy
+templates:
+  bin/swift_proxy_ctl: bin/swift_proxy_ctl
+  bin/monit_debugger: bin/monit_debugger
+  bin/setup.sh.erb: bin/setup.sh
+  bin/ring.sh.erb: bin/ring.sh
+  data/properties.sh.erb: data/properties.sh
+  helpers/ctl_setup.sh: helpers/ctl_setup.sh
+  helpers/ctl_utils.sh: helpers/ctl_utils.sh
+  config/swift.conf.erb : config/swift.conf
+  config/proxy-server.conf.erb : config/proxy-server.conf
+  config/logrotate.erb : config/swift_proxy.logrotate
+  config/50-default.conf.erb : config/50-default.conf
+  config/swift-proxy.override : config/swift-proxy.override
+  config/rsyncd.conf.erb : config/rsyncd.conf
+
+#properties:
+#  swift.authUrl:
+#    description: "URL for swift access"
+#  swift.memcache.ip_addresses:
+#    description: "List of IP addresses for memcache servers"
+#  swift.storageNodeIPs
+#    description: "List of IP addresses for swift storage nodes"
+#  swift.hashPathPrefix:
+#    description: "Salt prefix for hashing, not used before swift 1.8"
+#  swift.hashPathSuffix:
+#    description: "Salt suffix for hashing"
+#  swift.proxy0_ip_address:
+#    description: "IP address of the ring builder host (first swift proxy)"
+#  swift.rebalance_rings:
+#    description: "Force rebalance of rings"
+#    default: false
+#  swift.write_rings:
+#    description: "Force re-write of rings, without rebalance"
+#    default: false
+#  swift.statsd_host:
+#    description: "Host name or IP address of statsd server"
+#    default: ""
+#  swift.statsd_port:
+#    description: "Port number for statsd server"
+#    default: 8125
+#  swift.statsd_default_sample_rate:
+#    description: "default sample rate"
+#    default: 1.0
+#  swift.statsd_sample_rate_factor:
+#    description: "sample rate factor"
+#    default: 1.0
+#  swift.statsd_metric_prefix:
+#    description: "metric prefix"
+#    default: swift

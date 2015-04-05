@@ -1,0 +1,12 @@
+uid = swift
+gid = swift
+log file = /var/log/rsyncd.log
+pid file = /var/run/rsyncd.pid
+address = <%= spec.networks.send(properties.networks.swift).ip %>
+[rings]
+max connections = <%= p("swift.storage_node_IP_addresses").length %>
+path = /var/vcap/store
+read only = true
+lock file = /var/lock/rings.lock
+#hosts allow = <%= p("swift.storage_node_IP_addresses", []).join(', ') %>
+

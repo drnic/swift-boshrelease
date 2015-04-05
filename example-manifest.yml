@@ -1,0 +1,116 @@
+--- 
+# IP Address usage
+# 62 - proxy/0
+# 65 - storage/0
+# 66 - storage/1
+# 67 - storage/2
+# 68 - storage/3
+# 69 - storage/4
+#
+name: emc-swift
+director_uuid: 4d574749-0e54-473e-8073-50934bfea6c2
+
+releases: 
+- name: emc-swift
+  version: latest
+
+compilation: 
+  workers: 1
+  cloud_properties:
+      cpu: 1
+      disk: 18192
+      ram: 4096
+  network: default
+  reuse_compilation_vms: true
+
+networks:
+- name: default
+  subnets:
+  - reserved:
+    - 10.8.0.2 - 10.8.9.59
+    - 10.8.9.70 - 10.8.9.70
+    - 10.8.9.80 - 10.8.15.254
+    static:
+    - 10.8.9.60 - 10.8.9.69
+    range: 10.8.0.0/20
+    gateway: 10.8.0.1
+    dns:
+    - 10.8.0.13
+    - 10.8.0.14
+    cloud_properties:
+     name : Lab Network
+
+update: 
+  canary_watch_time: 30000 - 600000
+  update_watch_time: 30000 - 600000
+  max_in_flight: 1
+  max_errors: 1
+  canaries: 1
+
+resource_pools:
+- name: medium
+  network: default
+  stemcell:
+    name: bosh-vsphere-esxi-ubuntu-trusty-go_agent-hardened
+    version: 2732-1
+  cloud_properties:
+    cpu: 2
+    ram: 4096
+    disk: 5192
+
+jobs: 
+- name: swift_proxy
+  templates: 
+  - name: memcache
+    release: swift-dev
+  - name: swift_proxy
+    release: swift-dev
+  instances: 1
+  resource_pool: medium
+  persistent_disk: 1000
+  networks: 
+  - name: default
+    static_ips: &swift_proxy_ips
+    - &swift_proxy0_ip 10.8.9.62
+
+- name: swift_storage
+  templates: 
+  - name: swift_storage
+    release: swift-dev
+  instances: 5
+  resource_pool: medium
+  persistent_disk: 11240
+  networks: 
+  - name: default
+    static_ips: &swift_storage_ips
+    - 10.8.9.65
+    - 10.8.9.66
+    - 10.8.9.67
+    - 10.8.9.68
+    - 10.8.9.69
+
+properties:
+  networks:
+    swift: default
+
+  swift:
+    proxy0_ip_address: *swift_proxy0_ip
+    memcache: 
+      ip_addresses: *swift_proxy_ips
+      memcache_size_mb: 2048
+    hash_path_prefix: a4b2c8d9e7f5b4c7
+    hash_path_suffix: ef7cb596a1e195a8
+    storage_node_IP_addresses: *swift_storage_ips
+    loopback_device_size: 10GB
+    ring_host_IP: *swift_proxy0_ip
+    accounts:
+    - account: system
+      user: root
+      key: testpass
+      groups: .reseller_admin
+    - account: test
+      user: tester
+      key: testing
+      groups: .admin
+      auth_url: http://10.8.9.62:8080/v1/AUTH_system
+

@@ -1,0 +1,18 @@
+/var/log/swift/account.log
+/var/log/swift/container.log
+/var/log/swift/object.log
+/var/log/rsyncd.log
+{
+	rotate 7
+	size=100M
+	daily
+	missingok
+	notifempty
+	delaycompress
+	compress
+	sharedscripts
+	postrotate
+		service rsyslog restart >/dev/null 2>&1 || true
+	endscript
+}
+

@@ -1,0 +1,127 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+SYSLOG_DIR="/var/log/swift"
+if [ ! -d ${SYSLOG_DIR} ]
+then
+  mkdir -p ${SYSLOG_DIR}
+  chown syslog:adm ${SYSLOG_DIR}
+  chmod -R 755 ${SYSLOG_DIR}
+fi
+
+log() {
+  echo "$(date) ${*}"
+}
+
+installPackages() {
+  PKG_LOC=/var/vcap/packages/swift_storage
+  log "${0}: starting installing package"
+  sudo dpkg -i ${PKG_LOC}/*.deb
+}
+
+addUserToGroup() {
+  log "${0}: adding user swift to group vcap"
+  adduser swift vcap
+}
+
+applyServiceOverrides() {
+  log "${0}: applying service overrides"
+  cp /var/vcap/jobs/swift_storage/config/*.override /etc/init
+}
+
+configRsyslog() {
+  log "${0}: remove old rsyslog entry for storage.log"
+  sed -e '/local[0-2].*/d' -i /etc/rsyslog.conf
+
+  log "${0}: set storage log in rsyslog"
+  cp /var/vcap/jobs/swift_storage/config/50-default.conf /etc/rsyslog.d/
+
+  log "${0}: restart rsyslog"
+  service rsyslog restart
+
+  log "${0}: install logrotate configuration"
+  cp /var/vcap/jobs/swift_storage/config/swift_storage.logrotate /etc/logrotate.d/swift_storage
+}
+
+configRsync() {
+  log "${0}: copy rsync config files"
+  cp /var/vcap/jobs/swift_storage/config/rsyncd.conf /etc/rsyncd.conf
+  log "${0}: enable rsync"
+  sed -i.orig -e 's/^RSYNC_ENABLE=false/RSYNC_ENABLE=true/' /etc/default/rsync
+}
+
+createFileSystem () {
+  log "${0}: create swift filesystem"
+  /var/vcap/jobs/swift_storage/bin/configLoopBackDevice.sh
+}
+
+configSysctl() {
+  SYSCTL=/etc/sysctl.conf
+  
+  if ! grep -q '^net.ipv4.tcp_tw_recycle *= *1' ${SYSCTL}
+  then
+    log "${0}: enable tcp_tw_recycle"
+    echo 'net.ipv4.tcp_tw_recycle=1' >> ${SYSCTL}
+  fi
+  
+  if ! grep -q '^net.ipv4.tcp_tw_reuse *= *1' ${SYSCTL}
+  then
+    log "${0}: enable tcp_tw_reuse"
+    echo 'net.ipv4.tcp_tw_reuse=1' >> ${SYSCTL}
+  fi
+  
+  if ! grep -q '^vm.dirty_background_ratio *= *10' ${SYSCTL}
+  then
+    log "${0}: set vm.dirty_background_ratio"
+    echo 'vm.dirty_background_ratio=10' >> ${SYSCTL}
+  fi
+  
+  if ! grep -q '^vm.dirty_ratio *= *15' ${SYSCTL}
+  then
+    log "${0}: set dirty_ratio"
+    echo 'vm.dirty_ratio=15' >> ${SYSCTL}
+  fi
+  
+  if ! grep -q '^vm.dirty_expire_centisecs *= *500' ${SYSCTL}
+  then
+    log "${0}: set dirty_expire_centisecs"
+    echo 'vm.dirty_expire_centisecs=500' >> ${SYSCTL}
+  fi
+  
+  if ! grep -q '^vm.dirty_writeback_centisecs *= *500' ${SYSCTL}
+  then
+    log "${0}: set dirty_writeback_centisecs"
+    echo 'vm.dirty_writeback_centisecs=500' >> ${SYSCTL}
+  fi
+  
+  (sysctl -p||exit 0)
+}
+
+configSwiftStorage() {
+  log "${0}: copy swift config files"
+  mkdir -p /etc/swift
+  mkdir -p /var/cache/swift
+
+  cp /var/vcap/jobs/swift_storage/config/account-server.conf /etc/swift
+  cp /var/vcap/jobs/swift_storage/config/container-server.conf /etc/swift
+  cp /var/vcap/jobs/swift_storage/config/object-server.conf /etc/swift
+  cp /var/vcap/jobs/swift_storage/config/swift.conf /etc/swift
+  
+  log "${0}: retrieve rings from proxy server" 
+  rsync -ct <%= p("swift.ring_host_IP") %>::rings/*.{builder,gz} /etc/swift
+  chown -R swift:swift /etc/swift
+}
+
+log "${0}: begin"
+installPackages
+addUserToGroup
+applyServiceOverrides
+configRsyslog
+configRsync
+createFileSystem
+configSysctl
+configSwiftStorage
+log "${0}: done"
+

@@ -1,0 +1,13 @@
+# Override file for swift-account-reaper.conf
+
+manual
+pre-start script
+  if [ -f "/etc/swift/account-server.conf" ]; then
+    exec /usr/bin/swift-init  -r /var/vcap/sys/run/swift_storage account-reaper start
+  else
+    exit 1
+  fi
+end script
+
+post-stop exec /usr/bin/swift-init -r /var/vcap/sys/run/swift_storage account-reaper stop
+

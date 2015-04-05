@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+log() {
+  echo "$(date) ${*}"
+}
+
+# Setup env vars and folders for the webapp_ctl script
+source /var/vcap/jobs/swift_proxy/helpers/ctl_setup.sh 'swift_proxy'
+
+export PORT=${PORT:-5000}
+export LANG=en_US.UTF-8
+
+exec >> ${LOG_DIR}/${0##*/}.log
+exec 2>&1
+
+case $1 in
+
+  start)
+    log "${0}: setup for swift proxy"
+    /var/vcap/jobs/swift_proxy/bin/setup.sh
+
+    log "${0}: start proxy server"
+    service swift-proxy start
+    ;;
+
+  stop)
+    log "${0}: stop proxy server"
+    service swift-proxy stop
+
+    cp /etc/swift/*.gz /var/vcap/store
+    cp /etc/swift/*.builder /var/vcap/store
+    ;;
+
+  *)
+    echo "Usage: swift_proxy_ctl {start|stop}"
+    ;;
+
+esac
+exit 0

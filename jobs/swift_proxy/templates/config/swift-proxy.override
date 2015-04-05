@@ -1,0 +1,14 @@
+# Override file for /etc/init/swift-proxy.conf
+
+manual
+
+pre-start script
+  if [ -f "/etc/swift/proxy-server.conf" ]; then
+    exec /usr/bin/swift-init -r /var/vcap/sys/run/swift_proxy proxy-server start
+  else
+    exit 1
+  fi
+end script
+
+post-stop exec /usr/bin/swift-init -r /var/vcap/sys/run/swift_proxy proxy-server stop
+

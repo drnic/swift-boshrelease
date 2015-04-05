@@ -1,0 +1,43 @@
+#!/bin/bash
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+log() {
+  echo "$(date) ${*}"
+}
+
+SWIFT_STORE=/var/vcap/store/swift-disk_sdb1
+MOUNT_BASE=/srv/node
+MOUNT_POINT=${MOUNT_BASE}/sdb1
+
+if [ -e ${SWIFT_STORE} ]
+then
+  log "${0}: file ${SWIFT_STORE} already exists"
+else
+  truncate -s <%= p("swift.loopback_device_size") %> ${SWIFT_STORE}
+  /sbin/mkfs.xfs ${SWIFT_STORE}
+fi
+
+chown swift:swift ${SWIFT_STORE}
+
+if [ -d ${MOUNT_POINT} ]
+then
+  log "${0}: directory ${MOUNT_POINT} exists"
+else
+  mkdir -p ${MOUNT_POINT}
+fi
+
+log "${0}: mounting swift file system"
+mountpoint -q ${MOUNT_POINT} || mount -t xfs -o loop,noatime,nodiratime,nobarrier,logbufs=8 ${SWIFT_STORE} ${MOUNT_POINT}
+
+if [ -f ${MOUNT_POINT}/.owner_changed ]
+then
+  log "${0}: owner of objects already changed to swift:swift"
+else
+  log "${0}: change owner of objects to swift:swift"
+  chown -R swift:swift ${MOUNT_POINT}
+  touch ${MOUNT_POINT}/.owner_changed 
+  chown swift:swift ${MOUNT_POINT}/.owner_changed 
+  log "${0}: owner of objects changed to swift:swift"
+fi  
+

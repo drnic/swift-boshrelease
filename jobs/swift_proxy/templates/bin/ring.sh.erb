@@ -1,0 +1,96 @@
+#!/bin/bash
+
+log() {
+  echo "$(date) ${*}"
+}
+
+log "${0}: create or update rings"
+cd /etc/swift
+
+# check for existing ring & builder files
+if [[ -f /var/vcap/store/account.ring.gz &&
+   -f /var/vcap/store/container.ring.gz &&
+   -f /var/vcap/store/object.ring.gz &&
+   -f /var/vcap/store/account.builder &&
+   -f /var/vcap/store/container.builder &&
+   -f /var/vcap/store/object.builder ]]
+then
+  # restore saved rings and builder files
+  log "${0}: existing rings, restore to /etc/swift"
+  cp /var/vcap/store/*.gz /etc/swift
+  cp /var/vcap/store/*.builder /etc/swift
+else
+  log " ${0}: new rings, generate builders"
+  swift-ring-builder account.builder create 18 3 1
+  swift-ring-builder container.builder create 18 3 1
+  swift-ring-builder object.builder create 18 3 1
+fi
+
+nodeIPs="<%= p("swift.storage_node_IP_addresses").join(' ') %>"
+newIPs=""
+log "${0}: nodeIPs ${nodeIPs}"
+
+rebalance=0
+
+ZONE=1
+WEIGHT=50
+DEVICE=sdb1
+
+# check each node IP to see if it exists in rings already.
+# add to rings if not exists
+for ip in ${nodeIPs}
+do
+  cmdAcc=$(/usr/bin/swift-ring-builder /etc/swift/account.builder | grep ${ip}) 
+  cmdCon=$(/usr/bin/swift-ring-builder /etc/swift/container.builder |grep ${ip})
+  cmdObj=$(/usr/bin/swift-ring-builder /etc/swift/object.builder |grep ${ip})
+
+  if [[ "${cmdAcc}" && "${cmdCon}" && "${cmdObj}" ]] 
+  then
+    log "${0}: found existing node ${ip} in rings"
+  else
+    log "${0}: add new node ${ip} to rings"
+    newIPs="${newIPs} ${ip}"
+  fi
+
+done
+
+for ip in ${newIPs} 
+do
+  log "${0}: adding ${ip} to rings"
+  swift-ring-builder account.builder add z${ZONE}-${ip}:6002/${DEVICE} ${WEIGHT}
+  swift-ring-builder container.builder add z${ZONE}-${ip}:6001/${DEVICE} ${WEIGHT}
+  swift-ring-builder object.builder add z${ZONE}-${ip}:6000/${DEVICE} ${WEIGHT}
+  rebalance=1
+done
+
+log " ${0}: verify rings"
+#Verify contents
+swift-ring-builder account.builder
+swift-ring-builder container.builder
+swift-ring-builder object.builder
+
+<% if_p("swift.rebalance_rings") do |rebalance_rings| %>
+force_rebalance=<%= rebalance_rings %>
+<% end %>
+
+<% if_p("swift.write_rings") do |write_rings| %>
+force_write=<%= write_rings %>
+<% end %>
+
+if [[ ${rebalance} -eq 1 || ${force_rebalance:-0} ]]
+then
+  log "${0}: ${0}: rebalancng the rings"
+  swift-ring-builder account.builder rebalance
+  swift-ring-builder container.builder rebalance
+  swift-ring-builder object.builder rebalance
+else
+  if [ ${force_write:-0} ]
+  then
+    log "${0}: writing rings"
+    swift-ring-builder account.builder write_ring
+    swift-ring-builder container.builde write_ring
+    swift-ring-builder object.builde write_ring
+  fi
+fi
+
+log "${0}: done"

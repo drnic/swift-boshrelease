@@ -1,0 +1,81 @@
+#!/bin/bash
+
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+log() {
+  echo "$(date) ${*}"
+}
+
+LOG_DIR="/var/log/swift"
+if [ ! -d ${LOG_DIR} ] 
+then
+  mkdir -p ${LOG_DIR}
+  chown syslog:adm ${LOG_DIR}
+  chmod -R 775 ${LOG_DIR}
+fi
+
+installPackages() {
+  PKG_LOC=/var/vcap/packages/swift_proxy
+  log "${0}: starting installing package"
+  sudo dpkg -i ${PKG_LOC}/*.deb
+}
+
+applyServiceOverrides() {
+  log "${0}: applying service overrides"
+  cp /var/vcap/jobs/swift_proxy/config/swift-proxy.override /etc/init
+}
+
+configRsyslog() {
+  log "${0}: remove old rsyslog entry for proxy.log"
+  sed -e '/local0.*/d' -i /etc/rsyslog.conf
+  
+  log "${0}: set proxy log in rsyslog"
+  cp /var/vcap/jobs/swift_proxy/config/50-default.conf /etc/rsyslog.d/
+  
+  log "${0}: restart rsyslog"
+  service rsyslog restart
+  
+  log "${0}: install logrotate configuration"
+  cp /var/vcap/jobs/swift_proxy/config/swift_proxy.logrotate /etc/logrotate.d/swift_proxy
+}
+
+configRsync() {
+  log "${0}: copy rsync config files"
+  cp /var/vcap/jobs/swift_proxy/config/rsyncd.conf /etc/rsyncd.conf
+  log "${0}: enable rsync"
+  sed -i.orig -e 's/^RSYNC_ENABLE=false/RSYNC_ENABLE=true/' /etc/default/rsync
+}
+
+configSwiftProxy() {
+  log "${0}: copy swift config files"
+  mkdir -p /etc/swift
+  
+  cp /var/vcap/jobs/swift_proxy/config/swift.conf /etc/swift/swift.conf
+  cp /var/vcap/jobs/swift_proxy/config/proxy-server.conf /etc/swift/proxy-server.conf
+
+  if [ "<%= index %>" -eq 0 ]
+  then
+    # ring management is done by the first proxy.
+    # ring.sh will either generate new rings (new deployment)
+    # or add nodes to existing rings (add storage nodes).
+    /var/vcap/jobs/swift_proxy/bin/ring.sh
+  else
+    # additional proxies rsync the rings from proxy 0
+    log "${0}: retrieve rings from <%=properties.swift.proxy0_ip_address%>"
+    rsync -ct <%=properties.swift.proxy0_ip_address%>::rings/*.{builder,gz} /etc/swift
+  fi
+
+  log "${0}: change ownership of /etc/swift and contents"
+  chown -R swift:swift /etc/swift
+  log "${0}: save rings in persistent store"
+  cp /etc/swift/*.{builder,gz} /var/vcap/store
+}
+
+log "${0}: begin"
+installPackages
+applyServiceOverrides
+configRsyslog
+configRsync
+configSwiftProxy
+log "${0}: done"

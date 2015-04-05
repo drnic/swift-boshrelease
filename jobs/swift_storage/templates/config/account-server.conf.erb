@@ -1,0 +1,30 @@
+[DEFAULT]
+bind_ip = <%= spec.networks.send(properties.networks.swift).ip %>
+bind_port = 6002
+workers = 2
+# startup with swift user is failing so using root for now - fix this
+user = swift
+log_facility = LOG_LOCAL0
+log_headers = true
+#log_level = DEBUG
+
+<% if_p("swift.statsd_host") do |statsd_host| %>
+# statsd configuration
+log_statsd_host = <%= statsd_host %>
+log_statsd_port = <%= p("swift.statsd_port") %>
+log_statsd_default_sample_rate = <%= p("swift.statsd_default_sample_rate") %>
+log_statsd_sample_rate_factor = <%= p("swift.statsd_sample_rate_factor") %>
+log_statsd_metric_prefix = <%= p("swift.statsd_metric_prefix") %>
+<% end %>
+
+[pipeline:main]
+pipeline = account-server
+
+[app:account-server]
+use = egg:swift#account
+
+[account-replicator]
+
+[account-auditor]
+
+[account-reaper]

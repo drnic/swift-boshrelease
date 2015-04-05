@@ -1,0 +1,47 @@
+[DEFAULT]
+#cert_file = /etc/swift/cert.crt
+#key_file = /etc/swift/cert.key
+bind_port = 8080
+workers = 8
+user = swift
+
+log_facility = LOG_LOCAL0
+#log_level = DEBUG
+
+<% if_p("swift.statsd_host") do |statsd_host| %>
+# statsd configuration
+log_statsd_host = <%= statsd_host %>
+log_statsd_port = <%= p("swift.statsd_port") %>
+log_statsd_default_sample_rate = <%= p("swift.statsd_default_sample_rate") %>
+log_statsd_sample_rate_factor = <%= p("swift.statsd_sample_rate_factor") %>
+log_statsd_metric_prefix = <%= p("swift.statsd_metric_prefix") %>
+<% end %>
+
+[pipeline:main]
+pipeline = healthcheck proxy-logging cache tempauth proxy-logging proxy-server
+
+[app:proxy-server]
+use = egg:swift#proxy
+allow_account_management = true
+account_autocreate = true
+log_facility = LOG_LOCAL0
+log_headers = true
+log_level = DEBUG
+
+[filter:proxy-logging]
+use = egg:swift#proxy_logging
+
+[filter:tempauth]
+use = egg:swift#tempauth
+<% if_p("swift.accounts") do |accounts| %>
+<% accounts.each do |account| %>
+user_<%= account["account"] %>_<%= account["user"] %> = <%= account["key"] %> <%= account["groups"] %> <%= account["auth_url"] if account.key?("auth_url") %>
+<% end %>
+<% end %>
+
+[filter:healthcheck]
+use = egg:swift#healthcheck
+
+[filter:cache]
+use = egg:swift#memcache
+memcache_servers = <% sep="" %><% p("swift.memcache.ip_addresses", []).each_with_index {|ip_address, index| %><%= sep=", " if index > 0; sep+ip_address %>:11211<% } %>

@@ -1,0 +1,90 @@
+check process rsync
+  with pidfile /var/run/rsyncd.pid
+  start program "/etc/init.d/rsync start" with timeout 60 seconds
+  stop program "/etc/init.d/rsync stop"
+  group vcap
+  depends on object-server
+
+check process object-server
+  with pidfile /var/vcap/sys/run/swift_storage/object-server.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_object_server'" with timeout 600 seconds
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_object_server'"
+  group vcap
+
+check process  object-replicator
+  with pidfile /var/vcap/sys/run/swift_storage/object-replicator.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_object_replicator'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_object_replicator'"
+  group vcap
+  depends on object-server
+
+check process  object-updater
+  with pidfile /var/vcap/sys/run/swift_storage/object-updater.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_object_updater'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_object_updater'"
+  group vcap
+  depends on object-server
+
+check process  object-auditor
+  with pidfile /var/vcap/sys/run/swift_storage/object-auditor.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_object_auditor'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_object_auditor'"
+  group vcap
+  depends on object-server
+
+check process container-server
+  with pidfile /var/vcap/sys/run/swift_storage/container-server.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_container_server'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_container_server'"
+  group vcap
+  depends on object-server
+
+check process  container-replicator
+  with pidfile /var/vcap/sys/run/swift_storage/container-replicator.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_container_replicator'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_container_replicator'"
+  group vcap
+  depends on object-server
+
+check process  container-updater
+  with pidfile /var/vcap/sys/run/swift_storage/container-updater.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_container_updater'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_container_updater'"
+  group vcap
+  depends on object-server
+
+check process  container-auditor
+  with pidfile /var/vcap/sys/run/swift_storage/container-auditor.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_container_auditor'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_container_auditor'"
+  group vcap
+  depends on object-server
+
+check process account-server
+  with pidfile /var/vcap/sys/run/swift_storage/account-server.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_account_server'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_account_server'"
+  group vcap
+  depends on object-server
+
+check process  account-replicator
+  with pidfile /var/vcap/sys/run/swift_storage/account-replicator.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_account_replicator'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_account_replicator'"
+  group vcap
+  depends on object-server
+
+check process  account-reaper
+  with pidfile /var/vcap/sys/run/swift_storage/account-reaper.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_account_reaper'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_account_reaper'"
+  group vcap
+  depends on object-server
+
+check process  account-auditor
+  with pidfile /var/vcap/sys/run/swift_storage/account-auditor.pid
+  start program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl start_account_auditor'"
+  stop program "/var/vcap/jobs/swift_storage/bin/monit_debugger swift_storage_ctl '/var/vcap/jobs/swift_storage/bin/swift_storage_ctl stop_account_auditor'"
+  group vcap
+  depends on object-server
+

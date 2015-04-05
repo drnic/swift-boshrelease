@@ -1,0 +1,8 @@
+[swift-hash]
+# random unique strings that can never change (DO NOT LOSE)
+<% if_p("swift.hash_path_prefix") do |hash_path_prefix| %>
+swift_hash_path_prefix = <%= hash_path_prefix %>
+<% end %>
+<% if p("swift.hash_path_suffix") %>
+swift_hash_path_suffix = <%= p("swift.hash_path_suffix") %>
+<% end %>

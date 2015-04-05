@@ -1,0 +1,13 @@
+# Override file for swift-container.conf
+
+manual
+pre-start script
+  if [ -f "/etc/swift/container-server.conf" ]; then
+    exec /usr/bin/swift-init  -r /var/vcap/sys/run/swift_storage container-server start
+  else
+    exit 1
+  fi
+end script
+
+post-stop exec /usr/bin/swift-init -r /var/vcap/sys/run/swift_storage container-server stop
+

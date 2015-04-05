@@ -1,0 +1,12 @@
+check process swift_proxy
+  with pidfile /var/vcap/sys/run/swift_proxy/proxy-server.pid
+  start program "/var/vcap/jobs/swift_proxy/bin/monit_debugger swift_proxy_ctl '/var/vcap/jobs/swift_proxy/bin/swift_proxy_ctl start'" with timeout 450 seconds
+  stop program "/var/vcap/jobs/swift_proxy/bin/monit_debugger swift_proxy_ctl '/var/vcap/jobs/swift_proxy/bin/swift_proxy_ctl stop'"
+  group vcap
+
+check process rsync
+  with pidfile /var/run/rsyncd.pid
+  start program "/etc/init.d/rsync start" with timeout 60 seconds
+  stop program "/etc/init.d/rsync stop"
+  depends on swift_proxy
+  group vcap

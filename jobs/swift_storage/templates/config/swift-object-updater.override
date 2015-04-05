@@ -1,0 +1,13 @@
+# Override file for swift-object-updater.conf
+
+manual
+pre-start script
+  if [ -f "/etc/swift/object-server.conf" ]; then
+    exec /usr/bin/swift-init  -r /var/vcap/sys/run/swift_storage object-updater start
+  else
+    exit 1
+  fi
+end script
+
+post-stop exec /usr/bin/swift-init -r /var/vcap/sys/run/swift_storage object-updater stop
+

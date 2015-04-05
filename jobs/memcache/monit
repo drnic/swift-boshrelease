@@ -1,0 +1,6 @@
+check process memcache
+  with pidfile /var/run/memcached.pid
+  start program "/var/vcap/jobs/memcache/bin/monit_debugger memcache_ctl '/var/vcap/jobs/memcache/bin/memcache_ctl start'"
+  stop program "/var/vcap/jobs/memcache/bin/monit_debugger memcache_ctl '/var/vcap/jobs/memcache/bin/memcache_ctl stop'"
+  depends on swift_proxy
+  group vcap

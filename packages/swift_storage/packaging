@@ -1,0 +1,43 @@
+set -e # exit immediately if a simple command exits with a non-zero status
+set -u # report the usage of uninitialized variables
+
+# Available variables
+# $BOSH_COMPILE_TARGET - where this package & spec'd source files are available
+# $BOSH_INSTALL_TARGET - where you copy/install files to be included in package
+export HOME=/var/vcap
+
+cp swift/libjs-jquery_1.7.2+dfsg-2ubuntu1_all.deb $BOSH_INSTALL_TARGET
+cp swift/libjs-sphinxdoc_1.2.2+dfsg-1ubuntu1.1_all.deb $BOSH_INSTALL_TARGET
+cp swift/libjs-underscore_1.4.4-2ubuntu1_all.deb $BOSH_INSTALL_TARGET
+cp swift/libpython2.7-minimal_2.7.6-8_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/libpython2.7-stdlib_2.7.6-8_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/libpython-stdlib_2.7.5-5ubuntu3_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/libreadline5_5.2+dfsg-2_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/python2.7_2.7.6-8_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/python_2.7.5-5ubuntu3_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/python2.7-minimal_2.7.6-8_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/python-dns_2.3.6-3_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-dnspython_1.11.1-1build1_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-eventlet_0.13.0-1ubuntu2_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-formencode_1.2.6-1ubuntu1_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-greenlet_0.4.2-1build1_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/python-minimal_2.7.5-5ubuntu3_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/python-netifaces_0.8-3build1_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/python-openid_2.2.5-3ubuntu1_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-openssl_0.13-2ubuntu6_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/python-paste_1.7.5.1-6ubuntu3_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-pastedeploy_1.5.2-1_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-pastedeploy-tpl_1.5.2-1_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-pastescript_1.7.5-3build1_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-pkg-resources_3.3-1ubuntu1_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-scgi_1.13-1.1build1_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/python-setuptools_3.3-1ubuntu1_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-simplejson_3.3.1-1ubuntu6_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/python-swift_1.13.1-0ubuntu1.1_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-tempita_0.5.2-1build1_all.deb $BOSH_INSTALL_TARGET
+cp swift/python-xattr_0.6.4-2build1_amd64.deb $BOSH_INSTALL_TARGET
+cp swift/swift_1.13.1-0ubuntu1.1_all.deb $BOSH_INSTALL_TARGET
+cp swift/swift-account_1.13.1-0ubuntu1.1_all.deb $BOSH_INSTALL_TARGET
+cp swift/swift-container_1.13.1-0ubuntu1.1_all.deb $BOSH_INSTALL_TARGET
+cp swift/swift-object_1.13.1-0ubuntu1.1_all.deb $BOSH_INSTALL_TARGET
+cp swift/xfsprogs_3.1.9ubuntu2_amd64.deb $BOSH_INSTALL_TARGET

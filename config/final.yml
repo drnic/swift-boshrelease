@@ -1,0 +1,6 @@
+---
+final_name: emc-swift
+blobstore:
+  provider: local
+  options:
+    blobstore_path: /tmp/swift-blobstore
