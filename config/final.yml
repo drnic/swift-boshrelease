@@ -1,6 +1,6 @@
 ---
-final_name: emc-swift
 blobstore:
-  provider: local
+  provider: s3
   options:
-    blobstore_path: /tmp/swift-blobstore
+    bucket_name: swift-boshrelease
+final_name: swift
