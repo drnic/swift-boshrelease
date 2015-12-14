@@ -16,6 +16,7 @@ export LANG=en_US.UTF-8
 exec >> ${LOG_DIR}/${0##*/}.log
 exec 2>&1
 
+# TODO - where are these files now?
 OBJECT_RING=/etc/swift/object.ring.gz
 ACCOUNT_RING=/etc/swift/account.ring.gz
 CONTAINER_RING=/etc/swift/container.ring.gz
@@ -25,7 +26,7 @@ case $1 in
   start_object_server)
     log "${0}: setup for swift storage"
     /var/vcap/jobs/swift_storage/bin/setup.sh
-    
+
     if [ -f ${OBJECT_RING} ]
     then
       log "${0}: start object server "
@@ -34,22 +35,22 @@ case $1 in
       log "${0}: ${OBJECT_RING} missing, not starting object server"
     fi
     ;;
-  
+
   start_object_replicator)
     if [ -f ${OBJECT_RING} ]
     then
       log "${0}: start object replicator"
-      service swift-object-replicator start  
+      service swift-object-replicator start
     else
       log "${0}: ${OBJECT_RING} missing, not starting object replicator"
     fi
     ;;
- 
+
   start_object_updater)
     if [ -f ${OBJECT_RING} ]
     then
       log "${0}: start object updater"
-      service swift-object-updater start 
+      service swift-object-updater start
     else
       log "${0}: ${OBJECT_RING} missing, not starting object updater"
     fi
@@ -59,7 +60,7 @@ case $1 in
     if [ -f ${OBJECT_RING} ]
     then
       log "${0}: start object auditor"
-      service swift-object-auditor start 
+      service swift-object-auditor start
     else
       log "${0}: ${OBJECT_RING} missing, not starting object auditor"
     fi
@@ -69,7 +70,7 @@ case $1 in
     if [ -f ${CONTAINER_RING} ]
     then
       log "${0}: start container server"
-      service swift-container start 
+      service swift-container start
     else
       log "${0}: ${CONTAINER_RING} missing, not starting container server"
     fi
@@ -79,7 +80,7 @@ case $1 in
     if [ -f ${CONTAINER_RING} ]
     then
       log "${0}: start container replicator"
-      service swift-container-replicator start 
+      service swift-container-replicator start
     else
       log "${0}: ${CONTAINER_RING} missing, not starting container replicator"
     fi
@@ -89,7 +90,7 @@ case $1 in
     if [ -f ${CONTAINER_RING} ]
     then
       log "${0}: start container updater"
-      service swift-container-updater start 
+      service swift-container-updater start
     else
       log "${0}: ${CONTAINER_RING} missing, not starting container updater"
     fi
@@ -99,7 +100,7 @@ case $1 in
     if [ -f ${CONTAINER_RING} ]
     then
       log "${0}: start container auditor"
-      service swift-container-auditor start 
+      service swift-container-auditor start
     else
       log "${0}: ${CONTAINER_RING} missing, not starting container auditor"
     fi
@@ -109,7 +110,7 @@ case $1 in
     if [ -f ${ACCOUNT_RING} ]
     then
       log "${0}: start account server"
-      service swift-account start 
+      service swift-account start
     else
       log "${0}: ${CONTAINER_RING} missing, not starting account server"
     fi
@@ -119,7 +120,7 @@ case $1 in
     if [ -f ${ACCOUNT_RING} ]
     then
       log "${0}: start account replicator"
-      service swift-account-replicator start 
+      service swift-account-replicator start
     else
       log "${0}: ${CONTAINER_RING} missing, not starting account replicator"
     fi
@@ -129,7 +130,7 @@ case $1 in
     if [ -f ${ACCOUNT_RING} ]
     then
       log "${0}: start account reaper"
-      service swift-account-reaper start 
+      service swift-account-reaper start
     else
       log "${0}: ${CONTAINER_RING} missing, not starting account reaper"
     fi
@@ -139,7 +140,7 @@ case $1 in
     if [ -f ${ACCOUNT_RING} ]
     then
       log "${0}: start account auditor"
-      service swift-account-auditor start 
+      service swift-account-auditor start
     else
       log "${0}: ${CONTAINER_RING} missing, not starting account auditor"
     fi
@@ -157,57 +158,57 @@ case $1 in
 
   stop_object_replicator)
     log "${0}:  stop object replicator"
-    service swift-object-replicator stop 
+    service swift-object-replicator stop
     ;;
-  
+
   stop_object_updater)
     log "${0}:  stop object updater"
-    service swift-object-updater stop 
+    service swift-object-updater stop
     ;;
 
   stop_object_auditor)
     log "${0}:  stop object auditor"
-    service swift-object-auditor stop 
+    service swift-object-auditor stop
     ;;
 
   stop_container_server)
     log "${0}:  stop container server"
-    service swift-container stop 
+    service swift-container stop
     ;;
 
   stop_container_replicator)
     log "${0}:  stop container replicator"
-    service swift-container-replicator stop 
+    service swift-container-replicator stop
     ;;
 
   stop_container_updater)
     log "${0}:  stop container updator"
-    service swift-container-updater stop 
+    service swift-container-updater stop
     ;;
 
   stop_container_auditor)
     log "${0}:  stop container auditor"
-    service swift-container-auditor stop 
+    service swift-container-auditor stop
     ;;
 
   stop_account_server)
     log "${0}:  stop account server"
-    service swift-account stop 
+    service swift-account stop
     ;;
 
   stop_account_replicator)
     log "${0}:  stop account replicator"
-    service swift-account-replicator stop 
+    service swift-account-replicator stop
     ;;
 
   stop_account_reaper)
     log "${0}:  stop account reaper"
-    service swift-account-reaper stop 
+    service swift-account-reaper stop
     ;;
 
   stop_account_auditor)
     log "${0}:  stop account auditor"
-    service swift-account-auditor stop 
+    service swift-account-auditor stop
     ;;
 
   *)
