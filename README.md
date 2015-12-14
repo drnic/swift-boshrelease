@@ -1,11 +1,14 @@
-# BOSH Release for swift
+OpenStack Swift release for BOSH
+================================
 
-## Usage
+Deploy, scale and upgrade OpenStack Swift using BOSH.
+
+Usage
+-----
 
 To use this bosh release, first upload it to your bosh:
 
 ```
-bosh target BOSH_HOST
 git clone https://github.com/cloudfoundry-community/swift-boshrelease.git
 cd swift-boshrelease
 bosh upload release releases/swift-1.yml
@@ -31,7 +34,7 @@ For AWS & Openstack, the default deployment assumes there is a `default` securit
 
 Create a file `my-networking.yml`:
 
-``` yaml
+```yaml
 ---
 networks:
   - name: swift1
@@ -67,7 +70,6 @@ bosh create release --final
 ```
 
 By default the version number will be bumped to the next major number. You can specify alternate versions:
-
 
 ```
 bosh create release --final --version 2.1
