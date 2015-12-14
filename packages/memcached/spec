@@ -1,0 +1,6 @@
+---
+name: memcached
+dependencies: []
+files:
+- apt/memcached/profile.sh
+- apt/memcached/*.deb

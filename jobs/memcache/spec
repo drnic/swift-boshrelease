@@ -1,7 +1,7 @@
 ---
 name: memcache
-packages: 
-- memcache
+packages:
+- memcached
 templates:
   bin/memcache_ctl: bin/memcache_ctl
   bin/monit_debugger: bin/monit_debugger

@@ -15,10 +15,9 @@ log() {
   echo "$(date) ${*}"
 }
 
-installPackages() {
-  PKG_LOC=/var/vcap/packages/swift_storage
-  log "${0}: starting installing package"
-  sudo dpkg -i ${PKG_LOC}/*.deb
+setupPackages() {
+  log "${0}: setup swift_storage profile"
+  source /var/vcap/packages/swift_storage/profile.sh
 }
 
 addUserToGroup() {
@@ -59,43 +58,43 @@ createFileSystem () {
 
 configSysctl() {
   SYSCTL=/etc/sysctl.conf
-  
+
   if ! grep -q '^net.ipv4.tcp_tw_recycle *= *1' ${SYSCTL}
   then
     log "${0}: enable tcp_tw_recycle"
     echo 'net.ipv4.tcp_tw_recycle=1' >> ${SYSCTL}
   fi
-  
+
   if ! grep -q '^net.ipv4.tcp_tw_reuse *= *1' ${SYSCTL}
   then
     log "${0}: enable tcp_tw_reuse"
     echo 'net.ipv4.tcp_tw_reuse=1' >> ${SYSCTL}
   fi
-  
+
   if ! grep -q '^vm.dirty_background_ratio *= *10' ${SYSCTL}
   then
     log "${0}: set vm.dirty_background_ratio"
     echo 'vm.dirty_background_ratio=10' >> ${SYSCTL}
   fi
-  
+
   if ! grep -q '^vm.dirty_ratio *= *15' ${SYSCTL}
   then
     log "${0}: set dirty_ratio"
     echo 'vm.dirty_ratio=15' >> ${SYSCTL}
   fi
-  
+
   if ! grep -q '^vm.dirty_expire_centisecs *= *500' ${SYSCTL}
   then
     log "${0}: set dirty_expire_centisecs"
     echo 'vm.dirty_expire_centisecs=500' >> ${SYSCTL}
   fi
-  
+
   if ! grep -q '^vm.dirty_writeback_centisecs *= *500' ${SYSCTL}
   then
     log "${0}: set dirty_writeback_centisecs"
     echo 'vm.dirty_writeback_centisecs=500' >> ${SYSCTL}
   fi
-  
+
   (sysctl -p||exit 0)
 }
 
@@ -108,8 +107,8 @@ configSwiftStorage() {
   cp /var/vcap/jobs/swift_storage/config/container-server.conf /etc/swift
   cp /var/vcap/jobs/swift_storage/config/object-server.conf /etc/swift
   cp /var/vcap/jobs/swift_storage/config/swift.conf /etc/swift
-  
-  log "${0}: retrieve rings from proxy server" 
+
+  log "${0}: retrieve rings from proxy server"
   rsync -ct <%= p("swift.ring_host_IP") %>::rings/*.{builder,gz} /etc/swift
   chown -R swift:swift /etc/swift
 }
@@ -124,4 +123,3 @@ createFileSystem
 configSysctl
 configSwiftStorage
 log "${0}: done"
-

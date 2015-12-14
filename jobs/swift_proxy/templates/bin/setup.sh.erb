@@ -8,17 +8,16 @@ log() {
 }
 
 LOG_DIR="/var/log/swift"
-if [ ! -d ${LOG_DIR} ] 
+if [ ! -d ${LOG_DIR} ]
 then
   mkdir -p ${LOG_DIR}
   chown syslog:adm ${LOG_DIR}
   chmod -R 775 ${LOG_DIR}
 fi
 
-installPackages() {
-  PKG_LOC=/var/vcap/packages/swift_proxy
-  log "${0}: starting installing package"
-  sudo dpkg -i ${PKG_LOC}/*.deb
+setupPackages() {
+  log "${0}: setup swift_proxy profile"
+  source /var/vcap/packages/swift_proxy/profile.sh
 }
 
 applyServiceOverrides() {
@@ -29,13 +28,13 @@ applyServiceOverrides() {
 configRsyslog() {
   log "${0}: remove old rsyslog entry for proxy.log"
   sed -e '/local0.*/d' -i /etc/rsyslog.conf
-  
+
   log "${0}: set proxy log in rsyslog"
   cp /var/vcap/jobs/swift_proxy/config/50-default.conf /etc/rsyslog.d/
-  
+
   log "${0}: restart rsyslog"
   service rsyslog restart
-  
+
   log "${0}: install logrotate configuration"
   cp /var/vcap/jobs/swift_proxy/config/swift_proxy.logrotate /etc/logrotate.d/swift_proxy
 }
@@ -50,7 +49,7 @@ configRsync() {
 configSwiftProxy() {
   log "${0}: copy swift config files"
   mkdir -p /etc/swift
-  
+
   cp /var/vcap/jobs/swift_proxy/config/swift.conf /etc/swift/swift.conf
   cp /var/vcap/jobs/swift_proxy/config/proxy-server.conf /etc/swift/proxy-server.conf
 
