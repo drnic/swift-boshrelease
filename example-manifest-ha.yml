@@ -1,4 +1,4 @@
---- 
+---
 # IP Address usage
 # 60 - haproxy/0
 # 61 - haproxy/1
@@ -14,13 +14,13 @@
 name: emc-swift
 director_uuid: 4d574749-0e54-473e-8073-50934bfea6c2
 
-releases: 
+releases:
 - name: emc-swift
   version: latest
 - name: emc-haproxy
   version: latest
 
-compilation: 
+compilation:
   workers: 1
   cloud_properties:
       cpu: 1
@@ -46,7 +46,7 @@ networks:
     cloud_properties:
      name : Lab Network
 
-update: 
+update:
   canary_watch_time: 30000 - 600000
   update_watch_time: 30000 - 600000
   max_in_flight: 1
@@ -84,9 +84,9 @@ resource_pools:
     ram: 4096
     disk: 5192
 
-jobs: 
+jobs:
 - name: swift_proxy
-  templates: 
+  templates:
   - name: memcache
     release: swift-dev
   - name: swift_proxy
@@ -94,7 +94,7 @@ jobs:
   instances: 2
   resource_pool: swift_proxy
   persistent_disk: 1000
-  networks: 
+  networks:
   - name: default
     static_ips: &swift_proxy_ips
     - &swift_proxy0_ip 10.8.9.63
@@ -113,13 +113,13 @@ jobs:
     - 10.8.9.61
 
 - name: swift_storage
-  templates: 
+  templates:
   - name: swift_storage
     release: swift-dev
   instances: 5
   resource_pool: swift_storage
   persistent_disk: 11240
-  networks: 
+  networks:
   - name: default
     static_ips: &swift_storage_ips
     - 10.8.9.65
@@ -136,7 +136,7 @@ properties:
     virtual_router_id: 60
     virtual_ip_address: &keepalived_virtual_ip 10.8.9.62
     master_priority: 100
-    
+
   haproxy:
     port: 8080
     service_name: "swift_proxy"
@@ -145,14 +145,14 @@ properties:
 
   swift:
     proxy0_ip_address: *swift_proxy0_ip
-    memcache: 
+    memcache:
       ip_addresses: *swift_proxy_ips
       memcache_size_mb: 2048
+    storage_node_IP_addresses: *swift_storage_ips
     hash_path_prefix: a4b2c8d9e7f5b4c7
     hash_path_suffix: ef7cb596a1e195a8
-    storage_node_IP_addresses: *swift_storage_ips
     loopback_device_size: 10GB
-    ring_host_IP: *keepalived_virtual_ip
+    ring_host_ip: *keepalived_virtual_ip
     accounts:
     - account: system
       user: root
@@ -163,4 +163,3 @@ properties:
       key: testing
       groups: .admin
       auth_url: http://10.8.9.62:8080/v1/AUTH_system
-

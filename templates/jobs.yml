@@ -17,6 +17,13 @@ jobs:
   persistent_disk: 10000
   resource_pool: small_z1
   networks: (( param "please set storage networks" ))
+  properties:
+    swift:
+      hash_path_prefix: a4b2c8d9e7f5b4c7
+      hash_path_suffix: ef7cb596a1e195a8
+      loopback_device_size: 10GB
+      ring_host_ip: 10.10.10.10
+
 
 networks: (( param "please set networks" ))
 

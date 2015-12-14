@@ -109,12 +109,12 @@ configSwiftStorage() {
   cp /var/vcap/jobs/swift_storage/config/swift.conf /etc/swift
 
   log "${0}: retrieve rings from proxy server"
-  rsync -ct <%= p("swift.ring_host_IP") %>::rings/*.{builder,gz} /etc/swift
+  rsync -ct <%= p("swift.ring_host_ip") %>::rings/*.{builder,gz} /etc/swift
   chown -R swift:swift /etc/swift
 }
 
 log "${0}: begin"
-installPackages
+setupPackages
 addUserToGroup
 applyServiceOverrides
 configRsyslog

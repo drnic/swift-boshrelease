@@ -1,5 +1,5 @@
 [DEFAULT]
-bind_ip = <%= spec.networks.send(properties.networks.swift).ip %>
+bind_ip = <%= spec.networks.send(spec.networks.methods(false).first).ip %>
 bind_port = 6001
 workers = 2
 # startup with swift user is failing so using root for now - fix this

@@ -2,7 +2,7 @@ uid = swift
 gid = swift
 log file = /var/log/rsyncd.log
 pid file = /var/run/rsyncd.pid
-address = <%= spec.networks.send(properties.networks.swift).ip %>
+address = <%= spec.networks.send(spec.networks.methods(false).first).ip %>
 
 [account]
 max connections = 2

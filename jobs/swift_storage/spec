@@ -1,6 +1,6 @@
 ---
 name: swift_storage
-packages: 
+packages:
 - swift_storage
 templates:
   bin/swift_storage_ctl: bin/swift_storage_ctl
@@ -31,9 +31,24 @@ templates:
   config/swift-object-replicator.override : config/swift-object-replicator.override
   config/swift-object-updater.override : config/swift-object-updater.override
 
-#properties:
-#  swift.ringHostIP:
-#    description: "IP address from where rings are downloaded"
-#  swift.loopBackDeviceSize:
-#    description: "Size of swift filesystem container"
-  
+properties:
+  swift.ring_host_ip:
+    description: "IP address from where rings are downloaded"
+  swift.loopback_device_size:
+    description: "Size of swift filesystem container"
+
+  swift.hash_path_prefix:
+    description:
+  swift.hash_path_suffix:
+    description:
+
+  swift.statsd_host:
+    description: Host to emit statsd events (optional)
+  swift.statsd_port:
+    description:
+  swift.statsd_default_sample_rate:
+    description:
+  swift.statsd_sample_rate_factor:
+    description:
+  swift.statsd_metric_prefix:
+    description:
