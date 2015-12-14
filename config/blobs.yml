@@ -1,1 +1,265 @@
---- {}
+---
+apt/memcached/memcached_1.4.14-0ubuntu9_amd64.deb:
+  object_id: 9666556d-7dd5-4b79-b6a7-2c9a87b23159
+  sha: 248ea6cec12b6c1d3fcdbc80edcff2959f773687
+  size: 66682
+apt/swift_proxy/libjs-sphinxdoc_1.2.2+dfsg-1ubuntu1.1_all.deb:
+  object_id: 87d23125-ee59-40ae-9024-fbb4e31d0a7c
+  sha: 54ea410a639d6831c4f2f28e4f102c95238bf7ee
+  size: 41350
+apt/swift_proxy/libjs-underscore_1.4.4-2ubuntu1_all.deb:
+  object_id: 19a1a2af-9221-441a-b231-a4e22a8b5689
+  sha: 738d3a54ff39221c9f2679a36e709e0f49b29af9
+  size: 45586
+apt/swift_proxy/python-babel-localedata_1.3+dfsg.1-2ubuntu2_all.deb:
+  object_id: ceb53044-83d0-4211-be22-3887f2ab1c12
+  sha: 47a051eaeaf83710f639cb3ef3bb295d512ed5e5
+  size: 1928642
+apt/swift_proxy/python-babel_1.3+dfsg.1-2ubuntu2_all.deb:
+  object_id: 4ba191cd-222e-4db6-ac9b-999f188058bf
+  sha: c28c677b598c8c7dd9b10a64bd10e7171d16c1a5
+  size: 69690
+apt/swift_proxy/python-dns_2.3.6-3_all.deb:
+  object_id: 1f4fba5b-87ac-47f3-afae-e5c7c56ff9cf
+  sha: 2785141aa83ad08a817b238b7c4bf7394a3d4ab3
+  size: 25956
+apt/swift_proxy/python-dnspython_1.11.1-1build1_all.deb:
+  object_id: 94f5e1bb-5c79-4aed-b5dd-cf3dc7504049
+  sha: a65b5aebf1533eef49d99dfdbd35cbf213a2c967
+  size: 83068
+apt/swift_proxy/python-eventlet_0.13.0-1ubuntu2.2_all.deb:
+  object_id: f42441e6-f62b-41ac-a71d-e083bf25a187
+  sha: 06e5a24a09379a44d8528f483343db8c465ba030
+  size: 201958
+apt/swift_proxy/python-formencode_1.2.6-1ubuntu1_all.deb:
+  object_id: 6379d4ad-505d-4bd7-81a2-25c681a7a543
+  sha: 4808af5c7fc2ea7180463669d06825c8bf3c2afe
+  size: 75144
+apt/swift_proxy/python-greenlet_0.4.2-1ubuntu0.1_amd64.deb:
+  object_id: 8d650673-569d-4e07-9828-03e16a742707
+  sha: af1f4e3d7784c6a6e98cab029641a58a865d2970
+  size: 16772
+apt/swift_proxy/python-iso8601_0.1.10-0ubuntu1_all.deb:
+  object_id: 19037c79-2ca9-42d9-9d63-1b03bdbb50a1
+  sha: adebc66a6e98d1c567372db6ebfc55f277697dcb
+  size: 11748
+apt/swift_proxy/python-keystoneclient_1%3a0.7.1-ubuntu1.3_all.deb:
+  object_id: 89f17011-1bdb-49d8-a23e-63b4c2c2a431
+  sha: bff7a4c7c40ca930479adc593d59b6a43f9e0aa8
+  size: 138630
+apt/swift_proxy/python-netaddr_0.7.10-1ubuntu1.1_all.deb:
+  object_id: e984ae27-72cb-4a83-b4a6-cb3de47d7d2d
+  sha: a00c7642e03a6e07199da974bdbd332f876e7372
+  size: 848536
+apt/swift_proxy/python-netifaces_0.8-3build1_amd64.deb:
+  object_id: f6630c96-fb92-466e-8c81-12e0f47ff0b8
+  sha: d343aa06d7236f2363d0fcb5711d65da743bd04f
+  size: 11274
+apt/swift_proxy/python-openid_2.2.5-3ubuntu1_all.deb:
+  object_id: b0bd19e9-6a08-40be-b277-23eb2ecd6fb0
+  sha: 118e206cb732aedc9fff026b8ff9e846f48094b6
+  size: 118048
+apt/swift_proxy/python-oslo.config_1%3a1.2.1-0ubuntu2_all.deb:
+  object_id: 5256369e-056e-433e-8e3e-797711a5581f
+  sha: 08676cec7bb1fbedcfa9126a83815c5a11ebc6b8
+  size: 21608
+apt/swift_proxy/python-paste_1.7.5.1-6ubuntu3_all.deb:
+  object_id: 8e0fbd74-b55e-4406-bbef-7789a9cb32cc
+  sha: 4f080c3cd87c67c188bf701458c59ff55321129f
+  size: 366738
+apt/swift_proxy/python-pastedeploy-tpl_1.5.2-1_all.deb:
+  object_id: 734591e8-b867-4ef3-b899-2a8f9440edec
+  sha: 83b6ef3b2c6be442774143fb106d6ef3ddb7888f
+  size: 4518
+apt/swift_proxy/python-pastedeploy_1.5.2-1_all.deb:
+  object_id: 3d4354a1-d2e1-486f-bec5-775e0655aa8f
+  sha: f73fe8a7782cadc1c57130b50f7bb4ebe6065df3
+  size: 25514
+apt/swift_proxy/python-pastescript_1.7.5-3build1_all.deb:
+  object_id: 468b20c8-916c-45a2-8ce9-c3b952ac8ca2
+  sha: 3c4320f242fb5348ca032e9dd4d8765baf051117
+  size: 117134
+apt/swift_proxy/python-pbr_0.7.0-0ubuntu2_all.deb:
+  object_id: 174ba631-90e6-42f5-8d8b-7e1173644baf
+  sha: dea0803f95e06c829cb4acec7d530d0d1c9fd3d3
+  size: 36150
+apt/swift_proxy/python-pkg-resources_3.3-1ubuntu2_all.deb:
+  object_id: e55349a5-b336-4c90-b5ed-b7421a20bef6
+  sha: 5ca65ea801c538cd41f737c5c075288d1ff1cfac
+  size: 61910
+apt/swift_proxy/python-requests_2.2.1-1ubuntu0.3_all.deb:
+  object_id: 8473a27d-80d9-44b5-8e52-e647808dbff4
+  sha: 2fa81f5b7995e50e52822db4d6a46326b9cbc58c
+  size: 43140
+apt/swift_proxy/python-scgi_1.13-1.1build1_amd64.deb:
+  object_id: 53480d11-ba7a-4ae6-9c6b-f4f150377812
+  sha: 74873597e899659bc2e7cae024b9011ffa3296a4
+  size: 18426
+apt/swift_proxy/python-setuptools_3.3-1ubuntu2_all.deb:
+  object_id: 8df903d2-c4f7-4609-a58f-0695af96492e
+  sha: c0b0426d3c4bb8f45e61a9fb8f76021ee394f45b
+  size: 230056
+apt/swift_proxy/python-six_1.5.2-1ubuntu1_all.deb:
+  object_id: cada1cb4-87f5-40bc-96f2-e323fe9c9396
+  sha: 4ccdb4e9cd2101312de47771153336f7f8a00bc9
+  size: 8238
+apt/swift_proxy/python-swift_1.13.1-0ubuntu1.2_all.deb:
+  object_id: ff337be9-c0c3-4282-9b96-1ee5bd912255
+  sha: f4ca80a450973152761c123f26e5faec375e3830
+  size: 232086
+apt/swift_proxy/python-swiftclient_1%3a2.0.3-0ubuntu1_all.deb:
+  object_id: d3da7f9b-e730-4a57-8390-b6290c38c0fa
+  sha: a348ada288ec723e9158659afb9f82e4d5bbca2e
+  size: 31326
+apt/swift_proxy/python-tempita_0.5.2-1build1_all.deb:
+  object_id: c7283615-5230-4e23-bf5b-834fd910f0c2
+  sha: f6f7534427fe6ee584df0967341084e51e786475
+  size: 13776
+apt/swift_proxy/python-tz_2012c-1ubuntu0.1_all.deb:
+  object_id: d4122fbf-713d-4a6f-8ed1-3b5a928b3513
+  sha: 2729ee9da11dba3b4d66f09ebcf6d0e272685070
+  size: 31994
+apt/swift_proxy/python-urllib3_1.7.1-1ubuntu4_all.deb:
+  object_id: 81888d90-a710-49c1-add8-89d780d56d10
+  sha: 118967ed1c76c8516d7278859c21bbd00813fce9
+  size: 39488
+apt/swift_proxy/python-webob_1.3.1-1_all.deb:
+  object_id: 57478564-c5fc-410c-8306-954cd5aa3d04
+  sha: 5733b44d78f21ae774fd984ae54e9afa90c80d2d
+  size: 57868
+apt/swift_proxy/python-xattr_0.6.4-2build1_amd64.deb:
+  object_id: 6c44b1cb-d0a1-4e61-a675-877f70789ce1
+  sha: 29b3e81da8034f00602dc2a97b524c34151596e0
+  size: 12460
+apt/swift_proxy/swift-proxy_1.13.1-0ubuntu1.2_all.deb:
+  object_id: d5bb4c0a-064f-449c-a170-6f38fe393fee
+  sha: c84f58ebed01bb1c21246130198e9b7b9b97117f
+  size: 18740
+apt/swift_proxy/swift_1.13.1-0ubuntu1.2_all.deb:
+  object_id: 319c67ba-3ee9-4b56-b69d-b1c48442a344
+  sha: b7589b1de200b028013edec2491d4cd71835c040
+  size: 25224
+apt/swift_storage/libjs-sphinxdoc_1.2.2+dfsg-1ubuntu1.1_all.deb:
+  object_id: 2073de91-6ee8-4ee6-873e-12ffedd028bc
+  sha: 54ea410a639d6831c4f2f28e4f102c95238bf7ee
+  size: 41350
+apt/swift_storage/libjs-underscore_1.4.4-2ubuntu1_all.deb:
+  object_id: e60bf0df-00c3-4094-a1fe-4965c6b89051
+  sha: 738d3a54ff39221c9f2679a36e709e0f49b29af9
+  size: 45586
+apt/swift_storage/libpython2.7-minimal_2.7.6-8ubuntu0.2_amd64.deb:
+  object_id: 9ad721a2-31ba-451a-a249-495f4d17218b
+  sha: d8dcfb156026bbf451502eef0fc0376fa3fabefc
+  size: 307916
+apt/swift_storage/libpython2.7-stdlib_2.7.6-8ubuntu0.2_amd64.deb:
+  object_id: 1bbb298b-65cd-4e90-83c6-aba439263f44
+  sha: b3a639145df0e1fd76a98cb4c6f1ac08f2c4de2f
+  size: 1869374
+apt/swift_storage/libpython2.7_2.7.6-8ubuntu0.2_amd64.deb:
+  object_id: 47b67184-3b9e-467c-ad8b-b18d0e5a13f3
+  sha: 2660bd56f54a2601d227bd4a43641db7d8e2bfcc
+  size: 1038642
+apt/swift_storage/libreadline5_5.2+dfsg-2_amd64.deb:
+  object_id: a55fef22-a9af-4e84-b8d9-2bd2d3ad56ab
+  sha: 5e0e4d8cbad5302244c06f79f74497a30754f8af
+  size: 130428
+apt/swift_storage/python-dns_2.3.6-3_all.deb:
+  object_id: ac28f5e2-1c24-4ce0-86c3-6ba02af9ccf3
+  sha: 2785141aa83ad08a817b238b7c4bf7394a3d4ab3
+  size: 25956
+apt/swift_storage/python-dnspython_1.11.1-1build1_all.deb:
+  object_id: 6aa16a9e-41d5-42f8-93e7-c981732a4adf
+  sha: a65b5aebf1533eef49d99dfdbd35cbf213a2c967
+  size: 83068
+apt/swift_storage/python-eventlet_0.13.0-1ubuntu2.2_all.deb:
+  object_id: 91d2c394-31cf-4e9b-ba25-1cbc63aeacbf
+  sha: 06e5a24a09379a44d8528f483343db8c465ba030
+  size: 201958
+apt/swift_storage/python-formencode_1.2.6-1ubuntu1_all.deb:
+  object_id: 1e94dfaa-f8c0-4b09-a58f-2691f499ea15
+  sha: 4808af5c7fc2ea7180463669d06825c8bf3c2afe
+  size: 75144
+apt/swift_storage/python-greenlet_0.4.2-1ubuntu0.1_amd64.deb:
+  object_id: 87b563af-44d5-4a9e-8c3b-97acc871991b
+  sha: af1f4e3d7784c6a6e98cab029641a58a865d2970
+  size: 16772
+apt/swift_storage/python-netifaces_0.8-3build1_amd64.deb:
+  object_id: f7c4703c-117e-4d36-9f6a-b6b4cddbb41b
+  sha: d343aa06d7236f2363d0fcb5711d65da743bd04f
+  size: 11274
+apt/swift_storage/python-openid_2.2.5-3ubuntu1_all.deb:
+  object_id: b2545d32-543f-48d0-bad2-a7440bde6340
+  sha: 118e206cb732aedc9fff026b8ff9e846f48094b6
+  size: 118048
+apt/swift_storage/python-paste_1.7.5.1-6ubuntu3_all.deb:
+  object_id: 7cb2a0b4-d646-43e2-843b-765bb1577770
+  sha: 4f080c3cd87c67c188bf701458c59ff55321129f
+  size: 366738
+apt/swift_storage/python-pastedeploy-tpl_1.5.2-1_all.deb:
+  object_id: 30291a13-c7a8-4b38-91ea-58418e98a123
+  sha: 83b6ef3b2c6be442774143fb106d6ef3ddb7888f
+  size: 4518
+apt/swift_storage/python-pastedeploy_1.5.2-1_all.deb:
+  object_id: b662613c-4663-4a63-a865-29a8cc9251af
+  sha: f73fe8a7782cadc1c57130b50f7bb4ebe6065df3
+  size: 25514
+apt/swift_storage/python-pastescript_1.7.5-3build1_all.deb:
+  object_id: 7f858cbc-f0b2-4faa-9c2f-501b9c88d1f8
+  sha: 3c4320f242fb5348ca032e9dd4d8765baf051117
+  size: 117134
+apt/swift_storage/python-pkg-resources_3.3-1ubuntu2_all.deb:
+  object_id: d355e36d-33aa-41ba-825e-8871a278659f
+  sha: 5ca65ea801c538cd41f737c5c075288d1ff1cfac
+  size: 61910
+apt/swift_storage/python-scgi_1.13-1.1build1_amd64.deb:
+  object_id: d0b579d4-7b5b-40b4-a359-e8d010e37adb
+  sha: 74873597e899659bc2e7cae024b9011ffa3296a4
+  size: 18426
+apt/swift_storage/python-setuptools_3.3-1ubuntu2_all.deb:
+  object_id: c3f91b7e-62a9-4298-9833-d066480ed3bc
+  sha: c0b0426d3c4bb8f45e61a9fb8f76021ee394f45b
+  size: 230056
+apt/swift_storage/python-swift_1.13.1-0ubuntu1.2_all.deb:
+  object_id: 6d6101c1-f65b-447d-90b2-76cd1e2d8ebb
+  sha: f4ca80a450973152761c123f26e5faec375e3830
+  size: 232086
+apt/swift_storage/python-tempita_0.5.2-1build1_all.deb:
+  object_id: ee7039f8-8747-4245-b717-461c3a68666d
+  sha: f6f7534427fe6ee584df0967341084e51e786475
+  size: 13776
+apt/swift_storage/python-xattr_0.6.4-2build1_amd64.deb:
+  object_id: a9e2287b-0091-432c-9d44-ee5c4c2c73d9
+  sha: 29b3e81da8034f00602dc2a97b524c34151596e0
+  size: 12460
+apt/swift_storage/python2.7-minimal_2.7.6-8ubuntu0.2_amd64.deb:
+  object_id: 906d8cef-d22d-47b3-903a-5c4200d1728e
+  sha: 984bfe30245a2e757341b0c9abb16f97ae51b0b8
+  size: 1185096
+apt/swift_storage/python2.7_2.7.6-8ubuntu0.2_amd64.deb:
+  object_id: 86990e67-7a62-4ffe-a573-fb5ade552b56
+  sha: b87ff6940cd17466e867a5e1e6f70fbca14cfe0c
+  size: 195822
+apt/swift_storage/swift-account_1.13.1-0ubuntu1.2_all.deb:
+  object_id: 8bae1f42-4f81-4be4-92e9-dba8967c7052
+  sha: 4ee616369452123b67f6d96f3d8be557c23baa5d
+  size: 17044
+apt/swift_storage/swift-container_1.13.1-0ubuntu1.2_all.deb:
+  object_id: 06fb8c96-ee28-40a9-a5cc-cc443023f835
+  sha: df2115719b88c3d89a6f937a11b1b6b0336958ee
+  size: 15748
+apt/swift_storage/swift-object_1.13.1-0ubuntu1.2_all.deb:
+  object_id: 028ab301-5c55-4957-933c-96afad1ebcc1
+  sha: 07d1b7603c07010a97d077eea52d902533f7acda
+  size: 18166
+apt/swift_storage/swift_1.13.1-0ubuntu1.2_all.deb:
+  object_id: e08bafbc-f5f6-430c-99a1-a42a769bf137
+  sha: b7589b1de200b028013edec2491d4cd71835c040
+  size: 25224
+apt/swift_storage/xfsprogs_3.1.9ubuntu2_amd64.deb:
+  object_id: 0f616a8b-9192-4d3c-aa9c-33e00a28f185
+  sha: c0b0000a524e5e90b73d0eb05578b1ef8414e1e1
+  size: 508136
+memcached/memcached_1.4.14-0ubuntu9_amd64.deb:
+  object_id: 1e95e494-6e4e-45f8-878a-58661e2222a8
+  sha: 248ea6cec12b6c1d3fcdbc80edcff2959f773687
+  size: 66682
